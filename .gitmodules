@@ -1,0 +1,3 @@
+[submodule "submodules/OPTIMA"]
+	path = submodules/OPTIMA
+	url = ../OPTIMA.git
