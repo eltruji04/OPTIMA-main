@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Parts Searcher</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/finder.css') }}">
+    <!-- 
+    This HTML document serves as the frontend for a part-searching application.
+    It includes a form for users to input search terms and displays 
+    search results dynamically.
+    -->
+  </head>
+  <body>
+    <!-- Main heading of the application -->
+    <h1>Parts Searcher</h1>
+
+    <!-- Form to submit a search query -->
+    <form method="POST">
+      <label for="finder"> Enter the part name or part number: </label>
+      <!-- Input field for the search term -->
+      <input type="text" id="finder" name="finder" required />
+      <!-- Submit button -->
+      <button type="submit">Search</button>
+    </form>
+
+    <!-- Conditional block to check if results exist -->
+    {% if results %}
+    <h2>Search Results:</h2>
+    <ul>
+      <!-- Loop through each search result and display its details -->
+      {% for result in results %}
+      <li>
+        <!-- Displaying individual attributes of each result -->
+        <strong>Index number:</strong> {{ result[1] }}<br />
+        <strong>Part number:</strong> {{ result[2] }}<br />
+        <strong>Item name:</strong> {{ result[3] }}<br />
+        <strong>Unit per ASSY:</strong> {{ result[4] }}<br />
+        <strong>AVAIL:</strong> {{ result[5] }}<br />
+        <strong>Chapter:</strong> {{ result[6] }}<br />
+        <!-- Link to the associated PDF manual -->
+        <strong>PDF URL:</strong>
+        <a href="/manuals/{{ result[7] }}" target="_blank"> Open PDF </a>
+      </li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <!-- Message displayed if no results are found -->
+    <p>No results found.</p>
+    {% endif %}
+
+    <!-- Link to return to the main page -->
+    <a href="/">Back to the main page</a>
+  </body>
+</html>

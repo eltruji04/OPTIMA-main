@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit Item</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/update.css') }}">
+  </head>
+  <body>
+    <h1>Edit Item</h1>
+    <!-- Formulario de edición -->
+    <form method="POST">
+      <!-- Campo para Part Number -->
+      <label for="part_number">Part Number:</label>
+      <input
+        type="text"
+        id="part_number"
+        name="part_number"
+        value="{{ item['part_number'] }}"
+        required
+      />
+
+      <!-- Campo para Item Name -->
+      <label for="item_name">Item Name:</label>
+      <input
+        type="text"
+        id="item_name"
+        name="item_name"
+        value="{{ item['item_name'] }}"
+        required
+      />
+
+      <!-- Campo para Chapter -->
+      <label for="chapter">Chapter:</label>
+      <input
+        type="number"
+        id="chapter"
+        name="chapter"
+        value="{{ item['chapter'] }}"
+        required
+      />
+
+      <!-- Campo para Reminder Date -->
+      <label for="reminder_date">Reminder Date:</label>
+      <input
+        type="date"
+        id="reminder_date"
+        name="reminder_date"
+        value="{{ item['reminder_date'] }}"
+      />
+
+      <!-- Botón de envío -->
+      <button type="submit">Save Changes</button>
+    </form>
+
+    <!-- Enlace para volver a la página principal -->
+    <a href="{{ url_for('crud.parts_list') }}">Back to the main page</a>
+  </body>
+</html>

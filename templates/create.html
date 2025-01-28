@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create/Edit Item</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/create.css') }}">
+  </head>
+  <body>
+    <h1>Create/Edit Item</h1>
+    <form method="POST">
+      <label>Part Number:</label>
+      <input
+        type="text"
+        name="part_number"
+        value="{{ item.part_number if item else '' }}"
+        required
+      />
+
+      <label>Item Name:</label>
+      <input
+        type="text"
+        name="item_name"
+        value="{{ item.item_name if item else '' }}"
+        required
+      />
+
+      <label>Chapter:</label>
+      <input
+        type="number"
+        name="chapter"
+        value="{{ item.chapter if item else '' }}"
+        required
+      />
+
+      <label>Reminder Date:</label>
+      <input
+        type="date"
+        name="reminder_date"
+        value="{{ item.reminder_date if item else '' }}"
+      />
+
+      <button type="submit">Save</button>
+    </form>
+    <a href="{{ url_for('crud.parts_list') }}">Back to the main page</a>
+  </body>
+</html>
