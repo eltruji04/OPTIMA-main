@@ -1,7 +1,6 @@
 from flask import Flask, render_template, redirect
 
 import sys
-sys.path.append('/Users/santi/Desktop/OPTIMA/src/')
 
 from optima.crud import crud_app
 from optima.finder import finder_app

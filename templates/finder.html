@@ -1,55 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Parts Searcher</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Part Finder</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/finder.css') }}">
-    <!-- 
-    This HTML document serves as the frontend for a part-searching application.
-    It includes a form for users to input search terms and displays 
-    search results dynamically.
-    -->
-  </head>
-  <body>
-    <!-- Main heading of the application -->
-    <h1>Parts Searcher</h1>
+    <link rel="icon" href="{{ url_for('static', filename='images/OPTIMA_LOGO.ico') }}" type="image/x-icon" />
+</head>
+<body>
 
-    <!-- Form to submit a search query -->
-    <form method="POST">
-      <label for="finder"> Enter the part name or part number: </label>
-      <!-- Input field for the search term -->
-      <input type="text" id="finder" name="finder" required />
-      <!-- Submit button -->
-      <button type="submit">Search</button>
-    </form>
+    <div class="sidebar">
+        <div class="name-page">
+            <img 
+                id="logo" 
+                src="{{ url_for('static', filename='images/OPTIMA_LOGO.png') }}" 
+                alt="logo"
+                class="logo">
+            <span>OPTIMA</span>
+        </div>
+        <nav class="navigation">
+            <ul>
+                <!-- Navigation items -->
+                <li><a href="/"><ion-icon name="home"></ion-icon><span>Home</span></a></li>
+                <li><a id="active-page" href="/finder/"><ion-icon name="search-sharp"></ion-icon><span>Part Finder</span></a></li>
+                <li><a href="#"><ion-icon name="book"></ion-icon><span>Manuals</span></a></li>
+                <li><a href="/crud/"><ion-icon name="list"></ion-icon><span>Parts List</span></a></li>
+                <li><a href="#"><ion-icon name="time"></ion-icon><span>Maintance History</span></a></li>
+                <li><a href="#"><ion-icon name="build"></ion-icon><span>Repair Tracking</span></a></li>
+                <li><a href="#"><ion-icon name="cube"></ion-icon><span>Inventory</span></a></li>
+                <li><a href="#"><ion-icon name="settings-sharp"></ion-icon><span>Settings</span></a></li>
+            </ul>
+        </nav>
+    </div>
+    
+    <main>
+        <header class="header-finder">
+            <h1>Parts List</h1>
+            <form method="POST">
+                <div class="input-container">
+                    <ion-icon name="search-sharp" class="input-icon"></ion-icon>
+                    <input 
+                        class="search-box"
+                        type="text" 
+                        placeholder="Search parts..." 
+                        id="finder" 
+                        name="finder" 
+                        required 
+                    />
+                </div>
+            </form>
+        </header>
 
-    <!-- Conditional block to check if results exist -->
-    {% if results %}
-    <h2>Search Results:</h2>
-    <ul>
-      <!-- Loop through each search result and display its details -->
-      {% for result in results %}
-      <li>
-        <!-- Displaying individual attributes of each result -->
-        <strong>Index number:</strong> {{ result[1] }}<br />
-        <strong>Part number:</strong> {{ result[2] }}<br />
-        <strong>Item name:</strong> {{ result[3] }}<br />
-        <strong>Unit per ASSY:</strong> {{ result[4] }}<br />
-        <strong>AVAIL:</strong> {{ result[5] }}<br />
-        <strong>Chapter:</strong> {{ result[6] }}<br />
-        <!-- Link to the associated PDF manual -->
-        <strong>PDF URL:</strong>
-        <a href="/manuals/{{ result[7] }}" target="_blank"> Open PDF </a>
-      </li>
-      {% endfor %}
-    </ul>
-    {% else %}
-    <!-- Message displayed if no results are found -->
-    <p>No results found.</p>
-    {% endif %}
+        <!-- Conditional block to check if results exist -->
+        {% if results %}
+        <table class="parts-table">
+            <thead>
+                <tr>
+                    <th class="header-left">Part Number</th>
+                    <th>Item Name</th>
+                    <th>Unit per ASSY</th>
+                    <th>AVAIL</th>
+                    <th>Chapter</th>
+                    <th class="header-right">PDF URL</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for result in results %}
+                <tr>
+                    <td class="blue_text">{{ result[2] }}</td>
+                    <td>{{ result[3] }}</td>
+                    <td>{{ result[4] }}</td>
+                    <td>{{ result[5] }}</td>
+                    <td>{{ result[6] }}</td>
+                    <td><a href="/manuals/{{ result[7] }}" target="_blank">Open PDF</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
 
-    <!-- Link to return to the main page -->
-    <a href="/">Back to the main page</a>
-  </body>
+        {% else %}
+        <p class="no-results">No results found.</p>
+        {% endif %}
+
+        <footer class="footer">
+            <!-- Footer content here -->
+        </footer>
+    </main>
+
+
+    
+    <script src="{{ url_for('static', filename='js/sidebar.js') }}"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
 </html>
