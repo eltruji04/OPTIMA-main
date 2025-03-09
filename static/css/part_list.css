@@ -76,6 +76,12 @@ h1 {
 }
 
 /* --------------------------------------------> Navegation Menu */
+
+.title{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
 li {
     list-style: none;
     display: flex;
@@ -120,43 +126,10 @@ main.min-main {
     margin-left: 80px;
 }
 
-/* --------------------------------------------> Finder Box */
-
-.header-finder {
-    display: flex;
-    justify-content: space-between; /* Distribuye los elementos en los extremos */
-    align-items: center; /* Alinea verticalmente */
-    padding: 10px 20px; /* Agrega espacio en los bordes */
-}
-
-.input-container {
-    position: relative;
-    display: flex;
-    align-items: center;
-}
-
-.input-icon {
-    position: absolute;
-    color: #b3b8c2;
-}
-
-.search-box {
-    width: 250px;
-    padding: 10px 10px 10px 46px; /* Deja espacio para el icono */
-    border: 1px solid #e6e6e6;
-    border-radius: 7px;
-    font-weight: 600;
-    font-size: 14px;
-}
-
-::placeholder {
-    color: #b3b8c2;
-}
-
 /* --------------------------------------------> Table */
 
 /* Estilo general de la tabla */
-.parts-table {
+.table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 24px;
@@ -166,7 +139,7 @@ main.min-main {
 }
 
 /* Estilo para las cabeceras de la tabla */
-.parts-table th {
+.table th {
     background-color: #fdfdfd;
     color: #535d6a;
     padding: 14px;
@@ -174,6 +147,7 @@ main.min-main {
     font-weight: 500;
     font-size: 15px;
 }
+
 
 .blue_text{
     color: #2663eb;
@@ -189,33 +163,73 @@ main.min-main {
 }
 
 /* Estilo para las celdas de la tabla */
-.parts-table td {
+.table td {
     padding: 10px;
     text-align: left;
     border-top: 1.5px solid #f1f0f0;
 }
 
 /* Cambio de color al pasar el ratón sobre las filas */
-.parts-table tr:hover {
+.table tr:hover {
     background-color: #f6f6f6;
 }
 
-.parts-table a {
+.table a {
     color: #2663eb;
     text-decoration: none;
 }
 
-.parts-table a:hover {
+.table a:hover {
     background-color: #f6f6f6;
     text-decoration: underline;
 }
 
-.no-results{
-    text-align: center;
-    font-size: 28px;
-    font-weight: 500;
-    color: #6a5353;
-    margin-top: 40px;
+/* --------------------------------------------> Notification */
+
+/* Text no center */
+/* .notification {
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 8px;
+    font-size: 17px;
+    font-weight: 600;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #ed0d06;
+} */
+
+/* Text center */
+.notification {
+    padding: 15px;
+    margin: 22px 0;
+    border-radius: 10px;
+    font-size: 17px;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    color: #ed0d06;
+    text-align: center; /* Centra el texto horizontalmente */
+    display: flex;
+    justify-content: center; /* Centra el contenido del flex horizontalmente */
+    align-items: center; /* Centra el contenido del flex verticalmente */
+    gap: 10px;
+    background-color: white;
+}
+
+/* --------------------------------------------> Menu button */
+
+.menu-button{
+    margin-top: 100px;
+}
+
+.menu-button a{
+    font-size: 18px;
+}
+
+.menu-button a:hover{
+    color: #2663eb;
+    background-color: transparent;
 }
 
 /* --------------------------------------------> Footer */

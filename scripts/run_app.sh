@@ -11,6 +11,9 @@ set -euo pipefail
 # Name of the directory where the virtual environment will be stored
 VENV_DIR="venv"
 
+# Path to the requirements file
+REQUIREMENTS_FILE="requirements.txt"
+
 # Step 1: Check if the virtual environment already exists
 if [[ ! -d "$VENV_DIR" ]]; then
     echo "Creating the virtual environment..."
@@ -28,7 +31,15 @@ source "$VENV_DIR/bin/activate"
 # Updating `pip` ensures that the latest versions of tools and packages are used.
 pip install -U pip
 
-# Step 4: Install or update OPTIMA
+# Step 4: Install or update dependencies from requirements.txt
+if [[ -f "$REQUIREMENTS_FILE" ]]; then
+    echo "Installing dependencies from $REQUIREMENTS_FILE..."
+    pip install -r "$REQUIREMENTS_FILE"
+else
+    echo "No $REQUIREMENTS_FILE found. Skipping dependency installation."
+fi
+
+# Step 5: Install or update OPTIMA
 # This step checks if OPTIMA is already installed or if the `setup.py` file has changed.
 # If changes are detected, the dependency is reinstalled; otherwise, it is skipped.
 if [[ ! -f "$VENV_DIR/optima_installed.txt" || "$VENV_DIR/optima_installed.txt" -ot ./submodules/OPTIMA/setup.py ]]; then
@@ -41,6 +52,6 @@ else
     echo "OPTIMA is already installed and up to date."
 fi
 
-# Step 5: Run the application
+# Step 6: Run the application
 # This step starts the project's main application.
 python3 app.py

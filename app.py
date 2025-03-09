@@ -25,4 +25,4 @@ def hola():
     return redirect("https://eltruji04.github.io/OPTIMA.github.io/")
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True) 
