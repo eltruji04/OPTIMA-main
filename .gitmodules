@@ -1,4 +1,4 @@
 [submodule "submodules/OPTIMA"]
 	path = submodules/OPTIMA
-	url = https://github.com/eltruji04/OPTIMA
+	url = https://github.com/eltruji04/OPTIMA.git
 	branch = master
