@@ -1,0 +1,193 @@
+/* 
+Global Stylesheet for Application
+This file contains styles for layout, typography, forms, and interactive elements.
+*/
+
+/* Import Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&family=Montserrat:wght@100..900&display=swap");
+
+/* Global Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Inter, sans-serif;
+    text-decoration: none; /* Removes default underline from links */
+}
+
+/* Body Styling */
+body {
+    height: 100vh;
+    width: 100%;
+    background-color: #ebebed; /* Light gray background */
+    flex-direction: column;
+    min-height: 100vh; /* Ensures content occupies the full viewport height */
+}
+
+/* --------------------------------------------> Main Section */
+main {
+    padding: 50px;
+    transition: margin-left 0.5s ease; /* Smooth transition for sidebar toggle */
+}
+
+/* Adjusted main section when sidebar is minimized */
+main.min-main {
+    margin-left: 80px; /* Reduced margin for compact sidebar */
+}
+
+/* Box Container Styling */
+.box {
+    background-color: #feffff; /* White background */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 5px 5px 16px rgba(126, 126, 126, 0.4); /* Subtle shadow effect */
+    display: flex;
+    height: 530px;
+    align-items: center;
+    gap: 10px;
+    flex-direction: column; /* Stacks child elements vertically */
+}
+
+/* Logo Styling */
+.logo_box {
+    height: 90px;
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+}
+
+/* Title Styling */
+.title {
+    font-family: "Inter", sans-serif;
+    font-weight: 700; /* Bold font weight */
+    font-size: 36px; /* Large font size */
+    margin-top: 16px;
+    justify-content: center;
+    display: flex;
+}
+
+/* Description Styling */
+.description {
+    font-family: "Inter", sans-serif;
+    font-weight: 600; /* Semi-bold font weight */
+    font-size: 18px; /* Medium font size */
+    color: #535d6a; /* Grayish-blue text color */
+    padding-top: 10px;
+}
+
+/* Footer Styling */
+footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: margin-left 0.5s ease; /* Smooth transition for sidebar toggle */
+    margin-top: 60px;
+}
+
+.footer p {
+    font-size: 14px; /* Small font size */
+    color: #535d6a; /* Grayish-blue text color */
+    font-weight: 400; /* Regular font weight */
+}
+
+/* --------------------------------------------> Login Form */
+.login-form {
+    display: flex;
+    flex-direction: column; /* Stacks form fields vertically */
+    gap: 1rem; /* Adds consistent spacing between form elements */
+    margin-top: 3px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column; /* Aligns label and input vertically */
+}
+
+.input-group label {
+    font-size: 0.9rem; /* Slightly smaller font size for labels */
+    margin-bottom: 0.5rem; /* Space between label and input */
+}
+
+.input-group input {
+    padding: 0.5rem; /* Inner padding for inputs */
+    font-size: 1rem; /* Standard font size for inputs */
+    border: 1px solid #ccc; /* Light gray border */
+    border-radius: 4px; /* Rounded corners */
+}
+
+.login-button {
+    padding: 0.6rem; /* Inner padding for button */
+    font-size: 1rem; /* Standard font size for button text */
+    background-color: #007bff; /* Blue background */
+    color: white; /* White text */
+    border: none; /* Removes border */
+    border-radius: 4px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+}
+
+.login-button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* --------------------------------------------> Flash Messages */
+.flash-messages {
+    margin-bottom: 1rem; /* Adds space below flash messages */
+}
+
+/* Success Message Styling */
+.flash-message.success {
+    background-color: #d4edda; /* Light green background */
+    color: #155724; /* Dark green text */
+    border: 1px solid #c3e6cb; /* Green border */
+}
+
+/* Danger Message Styling */
+.flash-message.danger {
+    background-color: #f8d7da; /* Light red background */
+    color: #721c24; /* Dark red text */
+    border: 1px solid #f5c6cb; /* Red border */
+}
+
+/* Info Message Styling */
+.flash-message.info {
+    background-color: #cce5ff; /* Light blue background */
+    color: #0c5460; /* Dark blue text */
+    border: 1px solid #b8daff; /* Blue border */
+}
+
+/* Flash Message Container */
+.flash-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%; /* Full-width container */
+    z-index: 1000; /* Ensures messages appear above other content */
+    display: flex;
+    flex-direction: column; /* Stacks messages vertically */
+    align-items: center; /* Centers messages horizontally */
+    pointer-events: none; /* Prevents interaction with the container */
+}
+
+.flash-message {
+    position: relative;
+    margin-top: 25px; /* Space between messages */
+    padding: 1rem; /* Inner padding for messages */
+    border-radius: 6px; /* Rounded corners */
+    font-size: 22px; /* Large font size for visibility */
+    text-align: center; /* Centers text inside messages */
+    max-width: 600px; /* Limits message width */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+    animation: slideIn 0.4s ease-in-out; /* Slide-in animation */
+}
+
+/* Animation for Flash Messages */
+@keyframes slideIn {
+    from {
+        transform: translateY(-100%); /* Starts off-screen above */
+        opacity: 0; /* Fully transparent */
+    }
+    to {
+        transform: translateY(0); /* Moves to final position */
+        opacity: 1; /* Fully visible */
+    }
+}
