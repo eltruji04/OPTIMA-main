@@ -1,92 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Basic Page Metadata -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home page</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main_page.css') }}">
-    <link rel="icon" href="{{ url_for('static', filename='images/OPTIMA_LOGO.ico') }}" type="image/x-icon" />
-
+    <title>OPTIMA - Sign in</title>
+    
+    <!-- Stylesheet and Icon References -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/start.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='images/OPTIMA_LOGO.ico') }}" type="image/x-icon">
 </head>
-<body>
 
-    <div class="sidebar">
-        <div class="name-page">
-            <img 
-                id="logo" 
-                src="{{ url_for('static', filename='images/OPTIMA_LOGO.png') }}" 
-                alt="logo"
-                class="logo">
-            <span>OPTIMA</span>
-        </div>
-        <nav class="navigation">
-            <ul>
-                <!-- Elemento de navegación: Home -->
-                <li>
-                    <a id="active-page" href="/">
-                        <ion-icon name="home"></ion-icon>
-                        <span>Home</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="/finder/">
-                        <ion-icon name="search-sharp"></ion-icon>
-                        <span>Part Finder</span>
-                    </a>
-                </li>
-                <!-- Elemento de navegación: Manuals -->
-                <li>
-                    <a href="#">
-                        <ion-icon name="book"></ion-icon>
-                        <span>Manuals</span>
-                    </a>
-                </li>
-                <!-- Elemento de navegación: Parts list -->
-                <li>
-                    <a href="/crud/">
-                        <ion-icon name="list"></ion-icon>
-                        <span>Parts List</span>
-                    </a>
-                </li>
-                <!-- Elemento de navegación: Maintance History -->
-                <li>
-                    <a href="#">
-                        <ion-icon name="time"></ion-icon>
-                        <span>Maintance History</span>
-                    </a>
-                </li>
-                <!-- Elemento de navegación: Repair Tracking -->
-                <li>
-                    <a href="#">
-                        <ion-icon name="build"></ion-icon>
-                        <span>Repair Tracking</span>
-                    </a>
-                </li>
-                <!-- Elemento de navegación: Inventory -->
-                <li>
-                    <a href="#">
-                        <ion-icon name="cube"></ion-icon>
-                        <span>Inventory</span>
-                    </a>
-                </li>
-                <!-- Elemento de navegación: Settings -->
-                <li>
-                    <a href="#">
-                        <ion-icon name="settings-sharp"></ion-icon>
-                        <span>Settings</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-    </div>
+<body>
+    <!-- Flash Messages Container -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flash-container">
+                {% for category, message in messages %}
+                    <div class="flash-message {{ category }}">
+                        <span>{{ message }}</span>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <!-- Main Content Section -->
     <main>
         <div class="box">
-            <img 
-                class="logo_box"
-                src="{{ url_for('static', filename='images/OPTIMA_LOGO.png') }}">
+            <!-- Application Logo -->
+            <img class="logo_box" src="{{ url_for('static', filename='images/OPTIMA_LOGO.png') }}">
+            
+            <!-- Welcome Text -->
             <h1 class="title">Welcome to OPTIMA</h1>
-            <p class="description">Your advance aeronautical maintance managment system</p>
+            <p class="description">Sign in to access all features</p>
+
+            <!-- Login Form -->
+            <form class="login-form" action="/login" method="POST">
+                <!-- Username Field -->
+                <div class="input-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" placeholder="Enter your username" required>
+                </div>
+
+                <!-- Password Field -->
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="login-button">Login</button>
+            </form>
         </div>
+
+        <!-- Footer Section -->
         <footer class="footer">
             <div class="footer-content">
                 <p>&copy; 2025 OPTIMA. All rights reserved. v0.1</p>
@@ -94,10 +62,7 @@
         </footer>
     </main>
 
-
-
-
-
+    <!-- JavaScript Dependencies -->
     <script src="{{ url_for('static', filename='js/sidebar.js') }}"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>

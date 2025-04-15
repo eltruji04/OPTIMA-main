@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Basic Page Metadata -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Page Title -->
+    <title>Register</title>
+</head>
+
+<body>
+    <!-- Main Heading -->
+    <h1>Register</h1>
+
+    <!-- Registration Form -->
+    <form method="POST">
+        <!-- Username Field -->
+        <div class="form-group">
+            <label for="username">Username:</label>
+            <input 
+                type="text" 
+                id="username" 
+                name="username" 
+                required
+            />
+        </div>
+
+        <!-- Password Field -->
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input 
+                type="password" 
+                id="password" 
+                name="password" 
+                required
+            />
+        </div>
+
+        <!-- Role Selection Field -->
+        <div class="form-group">
+            <label for="role">Role:</label>
+            <select id="role" name="role">
+                <option value="user">User</option>
+                <option value="admin">Administrator</option>
+            </select>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit">Register</button>
+    </form>
+
+    <!-- Link to Login Page -->
+    <p>Already have an account? <a href="{{ url_for('login.login') }}">Log in here</a>.</p>
+</body>
+</html>
