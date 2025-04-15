@@ -1,99 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Parts List</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/part_list.css') }}">
-  <link rel="icon" href="{{ url_for('static', filename='images/OPTIMA_LOGO.ico') }}" type="image/x-icon" />
+    <!-- Basic Page Metadata -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Stylesheet and Icon References -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/part_list.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='images/OPTIMA_LOGO.ico') }}" type="image/x-icon" />
+    
+    <!-- Page Title -->
+    <title>Parts List</title>
 </head>
+
 <body>
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+        <div class="name-page">
+            <!-- Application Logo and Name -->
+            <img 
+                id="logo" 
+                src="{{ url_for('static', filename='images/OPTIMA_LOGO.png') }}" 
+                alt="OPTIMA Logo"
+                class="logo">
+            <span>OPTIMA</span>
+        </div>
 
-  <div class="sidebar">
-    <div class="name-page">
-        <img 
-            id="logo" 
-            src="{{ url_for('static', filename='images/OPTIMA_LOGO.png') }}" 
-            alt="logo"
-            class="logo">
-        <span>OPTIMA</span>
-    </div>
-    <nav class="navigation">
-        <ul>
-            <!-- Navigation items -->
-            <li><a href="/"><ion-icon name="home"></ion-icon><span>Home</span></a></li>
-            <li><a href="/finder/"><ion-icon name="search-sharp"></ion-icon><span>Part Finder</span></a></li>
-            <li><a href="#"><ion-icon name="book"></ion-icon><span>Manuals</span></a></li>
-            <li><a id="active-page" href="/crud/"><ion-icon name="list"></ion-icon><span>Parts List</span></a></li>
-            <li><a href="#"><ion-icon name="time"></ion-icon><span>Maintance History</span></a></li>
-            <li><a href="#"><ion-icon name="build"></ion-icon><span>Repair Tracking</span></a></li>
-            <li><a href="#"><ion-icon name="cube"></ion-icon><span>Inventory</span></a></li>
-            <li><a href="#"><ion-icon name="settings-sharp"></ion-icon><span>Settings</span></a></li>
-        </ul>
-    </nav>
-  </div>
-
-  <main>
-    <h1 class="title">Parts List</h1>
-
-    <!-- Display notifications if available -->
-    {% if notifications %}
-    <div>
-      {% for notification in notifications %}
-      <div class="notification">{{ notification.message }}</div>
-      {% endfor %}
-    </div>
-    {% endif %}
-
-    <!-- Table displaying parts -->
-    <table class="table">
-      <thead>
-        <tr>
-          <th class="header-left">Part Number</th>
-          <th>Item Name</th>
-          <th>Chapter</th>
-          <th class="header-right">Reminder Date</th>
-        </tr>
-      </thead>
-      <!-- Loop through each item in the parts list -->
-      <tbody>
-        {% for item in items %}
-        <tr>
-          <td>{{ item[1] }}</td>
-          <!-- Part Number -->
-          <td>{{ item[2] }}</td>
-          <!-- Item Name -->
-          <td>{{ item[3] }}</td>
-          <!-- Chapter -->
-          <td>{{ item[4] }}</td>
-          <!-- Reminder Date -->
-          <td>
-            <!-- Links for editing and deleting the item -->
-            <a href="{{ url_for('crud.update', item_id=item[0]) }}">Edit</a> 
-          </td>
-          <td>
-            <a href="{{ url_for('crud.delete', item_id=item[0]) }}">Delete</a>
-          </td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-
-    <div class="menu-button">
-      <!-- Link to create a new item -->
-      <a href="{{ url_for('crud.create') }}">Create New Item</a>
-
-      <!-- Link to return to the main page -->
-      <a href="/">Back to the main page</a>
+        <!-- Navigation Menu -->
+        <nav class="navigation">
+            <ul>
+                <!-- Home Navigation -->
+                <li><a href="/login/home_user"><ion-icon name="home"></ion-icon><span>Home</span></a></li>
+                <!-- Part Finder Navigation -->
+                <li><a href="/finder/"><ion-icon name="search-sharp"></ion-icon><span>Part Finder</span></a></li>
+                <!-- Manuals Navigation -->
+                <li><a href="#"><ion-icon name="book"></ion-icon><span>Manuals</span></a></li>
+                <!-- Parts List Navigation (Active Page) -->
+                <li><a id="active-page" href="/crud/"><ion-icon name="list"></ion-icon><span>Parts List</span></a></li>
+                <!-- Maintenance History Navigation -->
+                <li><a href="#"><ion-icon name="time"></ion-icon><span>Maintenance History</span></a></li>
+                <!-- Repair Tracking Navigation -->
+                <li><a href="#"><ion-icon name="build"></ion-icon><span>Repair Tracking</span></a></li>
+                <!-- Inventory Navigation -->
+                <li><a href="#"><ion-icon name="cube"></ion-icon><span>Inventory</span></a></li>
+                <!-- Settings Navigation -->
+                <li><a href="#"><ion-icon name="settings-sharp"></ion-icon><span>Settings</span></a></li>
+            </ul>
+        </nav>
     </div>
 
-    <footer class="footer">
-      <p>&copy; 2025 OPTIMA. All rights reserved. v0.1</p>
-  </footer>
-  </main>
+    <!-- Main Content Section -->
+    <main>
+        <!-- Main Heading -->
+        <h1 class="title">Parts List</h1>
 
-  <script src="{{ url_for('static', filename='js/sidebar.js') }}"></script>
-  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+        <!-- Notifications Section -->
+        {% if notifications %}
+        <div>
+            {% for notification in notifications %}
+            <div class="notification">{{ notification.message }}</div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <!-- Table Displaying Parts -->
+        <table class="table">
+            <thead>
+                <tr>
+                    <th class="header-left">Part Number</th>
+                    <th>Item Name</th>
+                    <th>Chapter</th>
+                    <th class="header-right">Reminder Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                <tr>
+                    <td>{{ item[1] }}</td> <!-- Part Number -->
+                    <td>{{ item[2] }}</td> <!-- Item Name -->
+                    <td>{{ item[3] }}</td> <!-- Chapter -->
+                    <td>{{ item[4] }}</td> <!-- Reminder Date -->
+                    <td>
+                        <!-- Edit Link -->
+                        <a href="{{ url_for('crud.update', item_id=item[0]) }}">Edit</a>
+                    </td>
+                    <td>
+                        <!-- Delete Link -->
+                        <a href="{{ url_for('crud.delete', item_id=item[0]) }}">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Action Buttons -->
+        <div class="menu-button">
+            <!-- Link to Create a New Item -->
+            <a href="{{ url_for('crud.create') }}">Create New Item</a>
+            <!-- Link to Return to the Main Page -->
+            <a href="/login/home_user">Back to the Main Page</a>
+        </div>
+
+        <!-- Footer Section -->
+        <footer class="footer">
+            <p>&copy; 2025 OPTIMA. All rights reserved. v0.1</p>
+        </footer>
+    </main>
+
+    <!-- JavaScript Dependencies -->
+    <script src="{{ url_for('static', filename='js/sidebar.js') }}"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>
 </html>

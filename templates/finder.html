@@ -1,44 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Basic Page Metadata -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Part Finder</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/finder.css') }}">
-    <link rel="icon" href="{{ url_for('static', filename='images/OPTIMA_LOGO.ico') }}" type="image/x-icon" />
-</head>
-<body>
 
+    <!-- Stylesheet and Icon References -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/finder.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='images/OPTIMA_LOGO.ico') }}" type="image/x-icon">
+</head>
+
+<body>
+    <!-- Sidebar Navigation -->
     <div class="sidebar">
         <div class="name-page">
+            <!-- Application Logo and Name -->
             <img 
                 id="logo" 
                 src="{{ url_for('static', filename='images/OPTIMA_LOGO.png') }}" 
-                alt="logo"
+                alt="OPTIMA Logo"
                 class="logo">
             <span>OPTIMA</span>
         </div>
+
+        <!-- Navigation Menu -->
         <nav class="navigation">
             <ul>
-                <!-- Navigation items -->
-                <li><a href="/"><ion-icon name="home"></ion-icon><span>Home</span></a></li>
+                <!-- Home Navigation -->
+                <li><a href="/login/home_user"><ion-icon name="home"></ion-icon><span>Home</span></a></li>
+                <!-- Part Finder Navigation (Active Page) -->
                 <li><a id="active-page" href="/finder/"><ion-icon name="search-sharp"></ion-icon><span>Part Finder</span></a></li>
+                <!-- Manuals Navigation -->
                 <li><a href="#"><ion-icon name="book"></ion-icon><span>Manuals</span></a></li>
+                <!-- Parts List Navigation -->
                 <li><a href="/crud/"><ion-icon name="list"></ion-icon><span>Parts List</span></a></li>
-                <li><a href="#"><ion-icon name="time"></ion-icon><span>Maintance History</span></a></li>
+                <!-- Maintenance History Navigation -->
+                <li><a href="#"><ion-icon name="time"></ion-icon><span>Maintenance History</span></a></li>
+                <!-- Repair Tracking Navigation -->
                 <li><a href="#"><ion-icon name="build"></ion-icon><span>Repair Tracking</span></a></li>
+                <!-- Inventory Navigation -->
                 <li><a href="#"><ion-icon name="cube"></ion-icon><span>Inventory</span></a></li>
+                <!-- Settings Navigation -->
                 <li><a href="#"><ion-icon name="settings-sharp"></ion-icon><span>Settings</span></a></li>
             </ul>
         </nav>
     </div>
-    
+
+    <!-- Main Content Section -->
     <main>
+        <!-- Header with Search Form -->
         <header class="header-finder">
             <h1>Parts List</h1>
             <form method="POST">
                 <div class="input-container">
+                    <!-- Search Icon -->
                     <ion-icon name="search-sharp" class="input-icon"></ion-icon>
+                    <!-- Search Input Field -->
                     <input 
                         class="search-box"
                         type="text" 
@@ -51,7 +69,7 @@
             </form>
         </header>
 
-        <!-- Conditional block to check if results exist -->
+        <!-- Conditional Block to Display Results or No Results Message -->
         {% if results %}
         <table class="parts-table">
             <thead>
@@ -77,18 +95,17 @@
                 {% endfor %}
             </tbody>
         </table>
-
         {% else %}
         <p class="no-results">No results found.</p>
         {% endif %}
 
+        <!-- Footer Section -->
         <footer class="footer">
             <p>&copy; 2025 OPTIMA. All rights reserved. v0.1</p>
         </footer>
     </main>
 
-
-    
+    <!-- JavaScript Dependencies -->
     <script src="{{ url_for('static', filename='js/sidebar.js') }}"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>

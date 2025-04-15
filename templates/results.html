@@ -1,22 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Basic Page Metadata -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Stylesheet Reference -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/finder.css') }}">
+    
+    <!-- Page Title -->
     <title>PDF Organizer</title>
 </head>
+
 <body>
-    <h1>Buscar PDFs</h1>
+    <!-- Main Heading -->
+    <h1>Search PDFs</h1>
+
+    <!-- Search Form -->
     <form method="POST" action="/pdf-organizer">
-        <input type="text" name="query" placeholder="Ingrese el término de búsqueda" value="{{ query }}">
-        <button type="submit">Buscar</button>
+        <div class="search-container">
+            <!-- Search Input Field -->
+            <input 
+                type="text" 
+                name="query" 
+                placeholder="Enter search term" 
+                value="{{ query }}" 
+                required
+            >
+            <!-- Submit Button -->
+            <button type="submit">Search</button>
+        </div>
     </form>
-    <h2>Resultados:</h2>
+
+    <!-- Results Section -->
+    <h2>Results:</h2>
     <ul>
-        {% for pdf in pdfs %}
-        <li><a href="/static/{{ pdf }}" target="_blank">{{ pdf }}</a></li>
-        {% endfor %}
+        {% if pdfs %}
+            {% for pdf in pdfs %}
+            <li>
+                <!-- Link to PDF File -->
+                <a href="/static/{{ pdf }}" target="_blank">{{ pdf }}</a>
+            </li>
+            {% endfor %}
+        {% else %}
+            <p>No results found.</p>
+        {% endif %}
     </ul>
 </body>
 </html>
