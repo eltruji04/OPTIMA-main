@@ -1,28 +1,35 @@
-from flask import Flask, render_template, redirect
+"""
+Flask Application Entry Point
 
-import sys
+This module initializes the Flask application, configures environment variables,
+registers blueprints, and defines the main route. It follows PEP 8 standards and
+professional documentation practices.
+"""
+
+from flask import Flask, render_template
+
+import os
 
 from optima.crud import crud_app
 from optima.finder import finder_app
+from optima.login import login_bp
 
-app = Flask(__name__, static_folder='static')
+app = Flask(__name__, static_folder="static")
+app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
+if not app.config["SECRET_KEY"]:
+    raise RuntimeError("SECRET_KEY environment variable not configured.")
+
+# Register Blueprints with URL prefixes
+app.register_blueprint(crud_app, url_prefix="/crud")
+app.register_blueprint(finder_app, url_prefix="/finder")
+app.register_blueprint(login_bp, url_prefix="/login")
 
 
-# Registra los Blueprints con los prefijos '/crud' y '/finder'
-app.register_blueprint(crud_app, url_prefix='/crud')
-app.register_blueprint(finder_app, url_prefix='/finder')
-
-
-
-# Ruta principal
-@app.route('/')
+@app.route("/")
 def index():
-    return render_template('index.html')
+    """Render the main application page"""
+    return render_template("index.html")
 
-@app.route('/webside')
-def hola():
-    # Redirige al usuario a una URL externa
-    return redirect("https://eltruji04.github.io/OPTIMA.github.io/")
 
-if __name__ == '__main__':
-    app.run(debug=True) 
+if __name__ == "__main__":
+    app.run(debug=True)
