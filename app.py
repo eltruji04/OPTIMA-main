@@ -7,6 +7,7 @@ professional documentation practices.
 """
 
 from flask import Flask, render_template
+from datetime import timedelta
 
 import os
 
@@ -18,6 +19,7 @@ app = Flask(__name__, static_folder="static")
 app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
 if not app.config["SECRET_KEY"]:
     raise RuntimeError("SECRET_KEY environment variable not configured.")
+app.config["PERMANENT_SESSION_LIFETIME"] = timedelta(minutes=10)
 
 # Register Blueprints with URL prefixes
 app.register_blueprint(crud_app, url_prefix="/crud")
