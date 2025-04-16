@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Basic Page Metadata -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Stylesheet Reference -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/create.css') }}">
+    
+    <!-- Page Title -->
+    <title>Create/Edit Item</title>
+</head>
+
+<body>
+    <!-- Main Heading -->
+    <h1>Create/Edit Item</h1>
+
+    <!-- Form for Creating or Editing an Item -->
+    <form method="POST">
+        <!-- Part Number Field -->
+        <div class="form-group">
+            <label for="part_number">Part Number:</label>
+            <input
+                type="text"
+                id="part_number"
+                name="part_number"
+                value="{{ item.part_number if item else '' }}"
+                required
+            />
+        </div>
+
+        <!-- Item Name Field -->
+        <div class="form-group">
+            <label for="item_name">Item Name:</label>
+            <input
+                type="text"
+                id="item_name"
+                name="item_name"
+                value="{{ item.item_name if item else '' }}"
+                required
+            />
+        </div>
+
+        <!-- Chapter Field -->
+        <div class="form-group">
+            <label for="chapter">Chapter:</label>
+            <input
+                type="number"
+                id="chapter"
+                name="chapter"
+                value="{{ item.chapter if item else '' }}"
+                required
+            />
+        </div>
+
+        <!-- Reminder Date Field -->
+        <div class="form-group">
+            <label for="reminder_date">Reminder Date:</label>
+            <input
+                type="date"
+                id="reminder_date"
+                name="reminder_date"
+                value="{{ item.reminder_date if item else '' }}"
+                required
+            />
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit">Save</button>
+    </form>
+
+    <!-- Back to Main Page Link -->
+    <div class="back-link">
+        <a href="{{ url_for('crud.parts_list') }}">Back to the main page</a>
+    </div>
+
+    <!-- JavaScript Dependencies -->
+    <script>
+        function logout() {
+            fetch("{{ url_for('login.logout') }}", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            }).then(() => {
+                window.location.href = "{{ url_for('login.login') }}"; // Redirige al inicio de sesión
+            });
+        }
+    </script>
+    <script>
+        let inactivityTimer;
+    
+        // Función para reiniciar el temporizador
+        function resetInactivityTimer() {
+            clearTimeout(inactivityTimer);
+            inactivityTimer = setTimeout(() => {
+                alert("Tu sesión ha expirado debido a inactividad.");
+                window.location.href = "{{ url_for('login.logout') }}"; // Redirige al cierre de sesión
+            }, 30 * 60 * 1000); // 30 minutos en milisegundos
+        }
+    
+        // Reiniciar el temporizador cuando haya actividad del usuario
+        window.onload = resetInactivityTimer;
+        document.onmousemove = resetInactivityTimer;
+        document.onkeypress = resetInactivityTimer;
+    </script>
+</body>
+</html>
