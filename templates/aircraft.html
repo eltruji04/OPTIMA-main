@@ -1,0 +1,127 @@
+<!--
+ * Aircraft Management Template Documentation
+ * ------------------------------------------
+ * This HTML template provides a user interface for managing aircraft in the MRO (Maintenance, Repair, and Operations) system. 
+ * It allows users to add new aircraft, view a list of registered aircraft, and perform actions such as editing, deleting, 
+ * and viewing associated parts. The template is designed to be dynamic and integrates seamlessly with Flask's templating 
+ * engine (Jinja2).
+ -->
+
+ <!DOCTYPE html>
+ <html lang="es">
+ <head>
+     <!-- Meta Tags -->
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <!-- Title -->
+     <title>MRO - Aeronaves</title>
+     <!-- Stylesheet -->
+     <link rel="stylesheet" href="{{ url_for('static', filename='css/aircraft.css') }}">
+ </head>
+ <body>
+     <!-- Main Container -->
+     <div class="container">
+         <!-- Header -->
+         <h1>Gestión de Aeronaves</h1>
+ 
+         <!-- Card for Adding a New Aircraft -->
+         <!-- 
+          * This section contains a form to add a new aircraft. 
+          * Users can input details such as model, registration, year of manufacture, manufacturer, and passenger capacity.
+          -->
+         <div class="card">
+             <div class="card-header">
+                 <h3>Agregar Nueva Aeronave</h3>
+             </div>
+             <div class="card-body">
+                 <form action="{{ url_for('mro.aircraft') }}" method="POST">
+                     <div>
+                         <label for="model" class="form-label">Modelo de la Aeronave</label>
+                         <input type="text" class="form-control" id="model" name="model" required>
+                     </div>
+                     <div>
+                         <label for="registration" class="form-label">Matrícula</label>
+                         <input type="text" class="form-control" id="registration" name="registration" required>
+                     </div>
+                     <div>
+                         <label for="year_of_manufacture" class="form-label">Año de Fabricación</label>
+                         <input type="number" class="form-control" id="year_of_manufacture" name="year_of_manufacture" min="1900" max="{{ current_year }}" required>
+                     </div>
+                     <div>
+                         <label for="manufacturer" class="form-label">Fabricante</label>
+                         <input type="text" class="form-control" id="manufacturer" name="manufacturer" required>
+                     </div>
+                     <div>
+                         <label for="passenger_capacity" class="form-label">Capacidad de Pasajeros</label>
+                         <input type="number" class="form-control" id="passenger_capacity" name="passenger_capacity" min="0">
+                     </div>
+                     <button type="submit" class="btn btn-primary">Agregar Aeronave</button>
+                 </form>
+             </div>
+         </div>
+ 
+         <!-- List of Registered Aircraft -->
+         <!-- 
+          * Displays a table of all registered aircraft. Each row includes details such as ID, model, registration, 
+          * year of manufacture, manufacturer, passenger capacity, and action buttons for editing, deleting, 
+          * and viewing associated parts.
+          -->
+         <h2>Aeronaves Registradas</h2>
+         <table class="table table-striped">
+             <thead>
+                 <tr>
+                     <th>ID</th>
+                     <th>Modelo</th>
+                     <th>Matrícula</th>
+                     <th>Año de Fabricación</th>
+                     <th>Fabricante</th>
+                     <th>Capacidad de Pasajeros</th>
+                     <th>Acciones</th>
+                 </tr>
+             </thead>
+             <tbody>
+                 {% if aircraft_list %}
+                     {% for aircraft in aircraft_list %}
+                     <tr>
+                         <td>{{ aircraft.id }}</td>
+                         <td>{{ aircraft.model }}</td>
+                         <td>{{ aircraft.registration }}</td>
+                         <td>{{ aircraft.year_of_manufacture }}</td>
+                         <td>{{ aircraft.manufacturer }}</td>
+                         <td>{{ aircraft.passenger_capacity or 'N/A' }}</td>
+                         <td>
+                             <!-- Edit Button -->
+                             <!-- 
+                              * Links to the `mro.edit_aircraft` route to edit the details of the selected aircraft.
+                              -->
+                             <a href="{{ url_for('mro.edit_aircraft', aircraft_id=aircraft.id) }}" class="btn btn-sm btn-warning">Editar</a>
+                             
+                             <!-- Delete Button -->
+                             <!-- 
+                              * Sends a POST request to the `mro.delete_aircraft` route to delete the selected aircraft. 
+                              * A confirmation dialog is displayed before submission to prevent accidental deletions.
+                              -->
+                             <form action="{{ url_for('mro.delete_aircraft', aircraft_id=aircraft.id) }}" method="POST" style="display:inline;">
+                                 <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminar esta aeronave?');">
+                                     Eliminar
+                                 </button>
+                             </form>
+                             
+                             <!-- View Parts Button -->
+                             <!-- 
+                              * Links to the `mro.aircraft_parts` route to view parts associated with the selected aircraft.
+                              -->
+                             <a href="{{ url_for('mro.aircraft_parts', aircraft_id=aircraft.id) }}" class="btn btn-sm btn-info">Ver Piezas</a>
+                         </td>
+                     </tr>
+                     {% endfor %}
+                 {% else %}
+                     <tr>
+                         <td colspan="7">No hay aeronaves registradas.</td>
+                     </tr>
+                 {% endif %}
+             </tbody>
+         </table>
+     </div>
+ </body>
+ </html>

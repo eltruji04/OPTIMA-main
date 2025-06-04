@@ -1,0 +1,82 @@
+<!--
+ * Parts Management Template Documentation
+ * ----------------------------------------
+ * This HTML template provides a user interface for managing parts in the MRO (Maintenance, Repair, and Operations) system. 
+ * It allows users to register new parts, associate them with specific aircraft, and view a list of all registered parts. 
+ * The template integrates seamlessly with Flask's templating engine (Jinja2) to render dynamic content.
+ -->
+
+ <!DOCTYPE html>
+ <html lang="es">
+ <head>
+     <!-- Meta Tags -->
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <!-- Title -->
+     <title>Gestión de Piezas</title>
+     <!-- Stylesheet -->
+     <link rel="stylesheet" href="{{ url_for('static', filename='css/mro.css') }}">
+ </head>
+ <body>
+     <!-- Main Header -->
+     <h1>Gestión de Piezas</h1>
+ 
+     <!-- Form to Register a New Part -->
+     <!-- 
+      * This form allows users to register a new part by providing its name, part number, and associating it with an aircraft.
+      * Upon submission, the data is sent to the `mro.parts` route via a POST request.
+      -->
+     <form action="{{ url_for('mro.parts') }}" method="POST">
+         <div>
+             <label for="part_name">Nombre de la Pieza:</label>
+             <input type="text" id="part_name" name="part_name" required>
+             <!-- Input field for the part's name -->
+         </div>
+         <div>
+             <label for="part_number">Número de Parte:</label>
+             <input type="text" id="part_number" name="part_number" required>
+             <!-- Input field for the part's unique part number -->
+         </div>
+         <div>
+             <label for="aircraft_id">Aeronave Asociada:</label>
+             <select id="aircraft_id" name="aircraft_id" required>
+                 {% for aircraft in aircraft_list %}
+                 <option value="{{ aircraft.id }}">{{ aircraft.registration }}</option>
+                 {% endfor %}
+             </select>
+             <!-- Dropdown menu to select the associated aircraft by registration number -->
+         </div>
+         <button type="submit">Registrar Pieza</button>
+         <!-- Submit Button: Sends the new part's data to the server -->
+     </form>
+ 
+     <!-- Table of Registered Parts -->
+     <!-- 
+      * Displays a table of all registered parts, including their ID, name, part number, associated aircraft, 
+      * and total flight hours. The data is dynamically rendered using Jinja2 syntax.
+      -->
+     <h2>Piezas Registradas</h2>
+     <table>
+         <thead>
+             <tr>
+                 <th>ID</th>
+                 <th>Nombre de la Pieza</th>
+                 <th>Número de Parte</th>
+                 <th>Aeronave</th>
+                 <th>Horas de Vuelo</th>
+             </tr>
+         </thead>
+         <tbody>
+             {% for part in parts %}
+             <tr>
+                 <td>{{ part.id }}</td>
+                 <td>{{ part.part_name }}</td>
+                 <td>{{ part.part_number }}</td>
+                 <td>{{ part.aircraft_registration }}</td>
+                 <td>{{ part.total_flight_hours }}</td>
+             </tr>
+             {% endfor %}
+         </tbody>
+     </table>
+ </body>
+ </html>

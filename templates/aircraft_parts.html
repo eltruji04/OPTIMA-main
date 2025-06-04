@@ -1,0 +1,90 @@
+<!--
+ * Aircraft Parts Template Documentation
+ * -------------------------------------
+ * This HTML template is used to display and manage parts associated with a specific aircraft. 
+ * It provides a user-friendly interface for adding new parts, viewing existing parts, 
+ * and deleting parts as needed. The template is designed to be dynamic and integrates 
+ * seamlessly with Flask's templating engine (Jinja2).
+ -->
+
+ <!DOCTYPE html>
+ <html lang="es">
+ <head>
+     <!-- Meta Tags -->
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <!-- Title -->
+     <title>Piezas de {{ aircraft.registration }}</title>
+     <!-- Stylesheet -->
+     <link rel="stylesheet" href="{{ url_for('static', filename='css/mro.css') }}">
+ </head>
+ <body>
+     <!-- Main Header -->
+     <h1>Piezas de la Aeronave: {{ aircraft.registration }}</h1>
+ 
+     <!-- Form to Add a New Part -->
+     <!-- 
+      * This form allows users to add a new part to the aircraft. 
+      * It sends a POST request to the `mro.aircraft_parts` route with the aircraft ID.
+      -->
+     <form action="{{ url_for('mro.aircraft_parts', aircraft_id=aircraft.id) }}" method="POST">
+         <div>
+             <label for="part_name">Nombre de la Pieza:</label>
+             <input type="text" id="part_name" name="part_name" required>
+         </div>
+         <div>
+             <label for="part_number">Número de Parte:</label>
+             <input type="text" id="part_number" name="part_number" required>
+         </div>
+         <button type="submit">Agregar Pieza</button>
+     </form>
+ 
+     <!-- Table of Linked Parts -->
+     <!-- 
+      * Displays a table of all parts linked to the current aircraft. 
+      * Each row includes the part's ID, name, part number, and an option to delete it.
+      -->
+     <h2>Piezas Vinculadas</h2>
+     <table>
+         <thead>
+             <tr>
+                 <th>ID</th>
+                 <th>Nombre de la Pieza</th>
+                 <th>Número de Parte</th>
+                 <th>Acciones</th>
+             </tr>
+         </thead>
+         <tbody>
+             {% for part in parts %}
+             <tr>
+                 <td>{{ part.id }}</td>
+                 <td>{{ part.part_name }}</td>
+                 <td>{{ part.part_number }}</td>
+                 <td>
+                     <!-- Form to Delete a Part -->
+                     <!-- 
+                      * This form sends a POST request to the `mro.delete_part` route 
+                      * to delete the specified part. A confirmation dialog is displayed 
+                      * before submission to prevent accidental deletions.
+                      -->
+                     <form action="{{ url_for('mro.delete_part', part_id=part.id) }}" method="POST" style="display:inline;">
+                         <button type="submit" class="btn btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminar esta pieza?');">
+                             Eliminar
+                         </button>
+                     </form>
+                 </td>
+             </tr>
+             {% endfor %}
+         </tbody>
+     </table>
+ 
+     <!-- Back Button -->
+     <!-- 
+      * Provides a link to return to the list of aircraft. 
+      * Redirects the user to the `mro.aircraft` route.
+      -->
+     <div>
+         <a href="{{ url_for('mro.aircraft') }}">Regresar a la lista de aeronaves</a>
+     </div>
+ </body>
+ </html>
