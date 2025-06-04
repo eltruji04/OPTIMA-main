@@ -14,6 +14,7 @@ import os
 from optima.crud import crud_app
 from optima.finder import finder_app
 from optima.login import login_bp
+from optima.mro import mro_bp
 
 app = Flask(__name__, static_folder="static")
 app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
@@ -25,7 +26,7 @@ app.config["PERMANENT_SESSION_LIFETIME"] = timedelta(minutes=10)
 app.register_blueprint(crud_app, url_prefix="/crud")
 app.register_blueprint(finder_app, url_prefix="/finder")
 app.register_blueprint(login_bp, url_prefix="/login")
-
+app.register_blueprint(mro_bp, url_prefix="/mro")
 
 @app.route("/")
 def index():
