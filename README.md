@@ -61,10 +61,10 @@ To run this project, you will need to add the following environment variables to
 
 ## Features
 
-- Light/dark mode toggle
-- Live previews
-- Fullscreen mode
-- Cross platform
+- User customization
+- Parts linked to their corresponding manual
+- Scheduled maintenance announcements
+- Adaptation for tablets
 
 
 ## Roadmap
@@ -74,6 +74,8 @@ To run this project, you will need to add the following environment variables to
 - Smart Inventory
 
 - Documentation Management
+
+- Database hosted on a server
 
 ## Feedback
 
