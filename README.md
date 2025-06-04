@@ -5,7 +5,7 @@ OPTIMA is a web-based platform designed to streamline Maintenance, Repair, and O
 🌟 OPTIMA: Simplifying aerospace fleet management for greater efficiency.
 
 
-![Logo](https://github.com/user-attachments/assets/410d8c14-9283-4070-9c3f-1d336b324093)
+![Image](https://github.com/user-attachments/assets/f0f69901-3994-4e47-8bf5-8f323993bacf)
 
 
 ## Installation
@@ -53,7 +53,9 @@ To run this project, you will need to add the following environment variables to
 
 ## Screenshots
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+![App Screenshot](https://github.com/user-attachments/assets/04828215-8b07-4359-bd73-292b0235060d)
+
+![App Screenshot](https://github.com/user-attachments/assets/7f62920c-7dda-4321-8d41-3b734289907e)
 
 
 ## License
@@ -88,5 +90,6 @@ If you have any feedback, please reach out to us at optima.aerospace@gmail.com
 - [@eltruji04](https://github.com/eltruji04)
 
 - [@ShawiR0gers](https://github.com/ShawiR0gers)
+
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
