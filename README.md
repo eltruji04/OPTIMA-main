@@ -4,10 +4,6 @@ OPTIMA is a web-based platform designed to streamline Maintenance, Repair, and O
 
 🌟 OPTIMA: Simplifying aerospace fleet management for greater efficiency.
 
-
-![Image](https://github.com/user-attachments/assets/f0f69901-3994-4e47-8bf5-8f323993bacf)
-
-
 ## Installation
 
 Install OPTIMA
