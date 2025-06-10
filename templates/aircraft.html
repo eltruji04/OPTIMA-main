@@ -13,7 +13,7 @@
      <!-- Main Container -->
      <div class="container">
          <!-- Header -->
-         <h1>Gestión de Aeronaves</h1>
+         <h1>Aircraft Management</h1>
  
          <!-- Card for Adding a New Aircraft -->
          <!-- 
@@ -22,31 +22,31 @@
           -->
          <div class="card">
              <div class="card-header">
-                 <h3>Agregar Nueva Aeronave</h3>
+                 <h3>Add new aircraft</h3>
              </div>
              <div class="card-body">
                  <form action="{{ url_for('mro.aircraft') }}" method="POST">
                      <div>
-                         <label for="model" class="form-label">Modelo de la Aeronave</label>
+                         <label for="model" class="form-label">Aircraft model</label>
                          <input type="text" class="form-control" id="model" name="model" required>
                      </div>
                      <div>
-                         <label for="registration" class="form-label">Matrícula</label>
+                         <label for="registration" class="form-label">Registration</label>
                          <input type="text" class="form-control" id="registration" name="registration" required>
                      </div>
                      <div>
-                         <label for="year_of_manufacture" class="form-label">Año de Fabricación</label>
+                         <label for="year_of_manufacture" class="form-label">Year of manufacture</label>
                          <input type="number" class="form-control" id="year_of_manufacture" name="year_of_manufacture" min="1900" max="{{ current_year }}" required>
                      </div>
                      <div>
-                         <label for="manufacturer" class="form-label">Fabricante</label>
+                         <label for="manufacturer" class="form-label">Manufactere</label>
                          <input type="text" class="form-control" id="manufacturer" name="manufacturer" required>
                      </div>
                      <div>
-                         <label for="passenger_capacity" class="form-label">Capacidad de Pasajeros</label>
+                         <label for="passenger_capacity" class="form-label">Passenger capacity</label>
                          <input type="number" class="form-control" id="passenger_capacity" name="passenger_capacity" min="0">
                      </div>
-                     <button type="submit" class="btn btn-primary">Agregar Aeronave</button>
+                     <button type="submit" class="btn btn-primary">Add aircraft</button>
                  </form>
              </div>
          </div>
@@ -57,17 +57,17 @@
           * year of manufacture, manufacturer, passenger capacity, and action buttons for editing, deleting, 
           * and viewing associated parts.
           -->
-         <h2>Aeronaves Registradas</h2>
+         <h2>Registered aircraft</h2>
          <table class="table table-striped">
              <thead>
                  <tr>
                      <th>ID</th>
-                     <th>Modelo</th>
-                     <th>Matrícula</th>
-                     <th>Año de Fabricación</th>
-                     <th>Fabricante</th>
-                     <th>Capacidad de Pasajeros</th>
-                     <th>Acciones</th>
+                     <th>Model</th>
+                     <th>Registration</th>
+                     <th>Year of manufacture</th>
+                     <th>Manufactere</th>
+                     <th>Passenger capacity</th>
+                     <th>Actions</th>
                  </tr>
              </thead>
              <tbody>
@@ -85,7 +85,7 @@
                              <!-- 
                               * Links to the `mro.edit_aircraft` route to edit the details of the selected aircraft.
                               -->
-                             <a href="{{ url_for('mro.edit_aircraft', aircraft_id=aircraft.id) }}" class="btn btn-sm btn-warning">Editar</a>
+                             <a href="{{ url_for('mro.edit_aircraft', aircraft_id=aircraft.id) }}" class="btn btn-sm btn-warning">Edit</a>
                              
                              <!-- Delete Button -->
                              <!-- 
@@ -94,7 +94,7 @@
                               -->
                              <form action="{{ url_for('mro.delete_aircraft', aircraft_id=aircraft.id) }}" method="POST" style="display:inline;">
                                  <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminar esta aeronave?');">
-                                     Eliminar
+                                     Delete
                                  </button>
                              </form>
                              
@@ -102,13 +102,13 @@
                              <!-- 
                               * Links to the `mro.aircraft_parts` route to view parts associated with the selected aircraft.
                               -->
-                             <a href="{{ url_for('mro.aircraft_parts', aircraft_id=aircraft.id) }}" class="btn btn-sm btn-info">Ver Piezas</a>
+                             <a href="{{ url_for('mro.aircraft_parts', aircraft_id=aircraft.id) }}" class="btn btn-sm btn-info">See pieces  </a>
                          </td>
                      </tr>
                      {% endfor %}
                  {% else %}
                      <tr>
-                         <td colspan="7">No hay aeronaves registradas.</td>
+                         <td colspan="7">There are no registered aircraft.</td>
                      </tr>
                  {% endif %}
              </tbody>

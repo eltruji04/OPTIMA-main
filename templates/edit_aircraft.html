@@ -3,36 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar Aeronave</title>
+    <title>Edit aircraft</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/aircraft.css') }}">
 </head>
 <body>
     <div class="container">
-        <h1>Editar Aeronave</h1>
+        <h1>Edit aircraft</h1>
 
         <!-- Formulario para Editar Aeronave -->
         <form action="{{ url_for('mro.edit_aircraft', aircraft_id=aircraft.id) }}" method="POST">
             <div>
-                <label for="model">Modelo:</label>
+                <label for="model">Model:</label>
                 <input type="text" id="model" name="model" value="{{ aircraft.model }}" required>
             </div>
             <div>
-                <label for="registration">Matrícula:</label>
+                <label for="registration">Registration:</label>
                 <input type="text" id="registration" name="registration" value="{{ aircraft.registration }}" required>
             </div>
             <div>
-                <label for="year_of_manufacture">Año de Fabricación:</label>
+                <label for="year_of_manufacture">Year of manufacture:</label>
                 <input type="number" id="year_of_manufacture" name="year_of_manufacture" value="{{ aircraft.year_of_manufacture }}" required>
             </div>
             <div>
-                <label for="manufacturer">Fabricante:</label>
+                <label for="manufacturer">Manufactere:</label>
                 <input type="text" id="manufacturer" name="manufacturer" value="{{ aircraft.manufacturer }}" required>
             </div>
             <div>
-                <label for="passenger_capacity">Capacidad de Pasajeros:</label>
+                <label for="passenger_capacity">Passenger capacity:</label>
                 <input type="number" id="passenger_capacity" name="passenger_capacity" value="{{ aircraft.passenger_capacity or '' }}">
             </div>
-            <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+            <button type="submit" class="btn btn-primary">Save changes</button>
         </form>
     </div>
 </body>

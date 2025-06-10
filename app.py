@@ -28,6 +28,7 @@ app.register_blueprint(finder_app, url_prefix="/finder")
 app.register_blueprint(login_bp, url_prefix="/login")
 app.register_blueprint(mro_bp, url_prefix="/mro")
 
+
 @app.route("/")
 def index():
     """Render the main application page"""
